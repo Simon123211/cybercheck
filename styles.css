@@ -1,0 +1,749 @@
+/* CyberCheck - Main Stylesheet
+   Approach: mobile-first. Base styles are for small screens;
+   larger screens are added with min-width media queries
+*/
+
+/* === 1. Design Tokens === */
+/* Reference: MDN – "Using CSS Custom Properties (Variables)" */
+:root {
+    --colour-primary: #0b3d5c;
+    --colour-accent: #0e7c86;
+    --colour-accent-dark: #0a5f67;
+    --colour-text: #1f2933;
+    --colour-text-muted: #52606d;
+    --colour-bg: #f5f7fa;
+    --colour-surface: #ffffff;
+    --colour-border: #cbd2d9;
+    --colour-focus: #ffbf47;
+    --colour-error: #b42318;
+
+    --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-x1: 2.5rem;
+    --radius: 8px;
+    --shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    --max-width: 1100px;
+}
+
+/*  === Base Styles === */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--colour-text);
+    background-color: var(--colour-bg);
+}
+
+h1,
+h2,
+h3 {
+    color:var(--colour-primary);
+    line-height: 1.25;
+    margin-top: 0;
+}
+
+h1 { font-size: 1.9rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.15rem; }
+
+a {
+    color: var(--colour-accent-dark);
+}
+
+a:hover {
+    text-decoration-thickness: 3px;
+}
+
+/* Reference: MDN – ":focus-visible" pseudo-class */
+:focus-visible {
+    outline: 3px solid var(--colour-focus);
+    outline-offset: 2px;
+}
+
+/* === 3. Accessibility Helper === */
+/* Reference: W3C WAI – "Skip Link Techniques" */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: var(--space-md);
+    z-index: 100;
+    padding: var(--space-sm) var(--space-md);
+    background-color: var(--colour-focus);
+    color: var(--colour-primary);
+    font-weight: 700;
+    border-radius: var(--radius);
+}
+
+.skip-link:focus {
+    top: var(--space-md);
+}
+
+/* Reference: W3C WAI – "Visually Hidden Content for Accessibility" */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* 4. Header and Navigation (mobile) === */
+/* Citation: Smashing Magazine – "Hamburger Menu Animations" covers pseudo-element bars,
+   transform-based hamburger-to-X animations, attribute selectors, and sibling selectors
+   used to reveal mobile navigation. */
+
+.site-header {
+    background-color: var(--colour-primary);
+    color: #ffffff;
+}
+
+.header-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-md);
+}
+
+.logo {
+    color: #ffffff;
+    font-size: 1.35rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.menu-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    color: #ffffff;
+    font: inherit;
+    border: 2px solid #ffffff;
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+/* Hamburger Icon */
+.menu-icon,
+.menu-icon::before,
+.menu-icon::after {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: #ffffff;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.menu-icon {
+    position: relative;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+}
+
+.menu-icon::before { top: -6px; }
+.menu-icon::after { top: 6px; }
+
+/* Animate hamburger into X when menu is open */
+.menu-toggle[aria-expanded="true"] .menu-icon {
+    background-color: transparent;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-icon::before {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-icon::after {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Navigation is collapsed on mobile and slides open */
+.site-nav {
+    flex-basis: 100%;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: max-height 0.35s ease, visibility 0.35s ease;
+}
+
+/* Attribute selector + adjacent sibling: open when the button says expanded */
+.menu-toggle[aria-expanded="true"] + .site-nav {
+    max-height: 300px;
+    visibility: visible;
+}
+
+.site-nav ul {
+    list-style: none;
+    margin: var(--space-md) 0 0;
+    padding: 0;
+}
+
+.site-nav a {
+    display: block;
+    padding: var(--space-sm) 0;
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.site-nav a:hover {
+    text-decoration: underline;
+}
+
+/* === 5. Layout: Sections === */
+main > section {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-x1) var(--space-md);
+}
+
+/* === 6. Buttons === */
+.button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--colour-accent);
+    color: #ffffff;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.button:hover {
+    background-color: var(--colour-accent-dark);
+    text-decoration: none;
+}
+
+/* === 7. Intro === */
+.intro {
+    text-align: center;
+}
+
+.intro p {
+    max-width: 60ch;
+    margin: 0 auto var(--space-lg);
+    font-size: 1.1rem;
+}
+
+/* === 8. How it works: numbered step cards === */
+/* Reference: MDN – "CSS Counters" */
+.steps {
+    list-style: none;
+    counter-reset: step;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-md);
+}
+
+.steps li {
+    counter-increment: step;
+    position: relative;
+    padding: var(--space-lg) var(--space-lg) var(--space-lg) 4rem;
+    background-color: var(--colour-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* Customs step numbers using CSS counter and ::before */
+/* Reference: MDN – "Generated Content ::before and ::after" */
+.steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: var(--space-md);
+    top: var(--space-lg);
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    background-color: var(--colour-accent);
+    color: #ffffff;
+    font-weight: 700;
+    border-radius: 50%;
+}
+
+.steps p {
+    margin-bottom: 0;
+}
+
+/* === 9. Resources === */
+.resource-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-md);
+}
+
+.resource-list li {
+    padding: var(--space-md) var(--space-lg);
+    background-color: var(--colour-surface);
+    border-left: 4px solid var(--colour-accent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.resource-list a{
+    font-weight:  600;
+}
+
+.resource-list p {
+    margin: var(--space-xs) 0 0;
+    color: var(--colour-text-muted);
+}
+
+
+/* === 10. Footer === */
+.site-footer {
+    padding: var(--space-lg) var(--space-md);
+    background-color: var(--colour-primary);
+    color: #ffffff;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.site-footer p {
+    margin: var(--space-xs) 0;
+}
+
+
+/* === 11. Form: Layout === */
+.check-form {
+    display: grid;
+    gap: var(--space-lg);
+}
+
+.form-intro {
+    margin: 0;
+    color: var(--colour-text-muted);
+}
+
+/* Each main section of form is a white card */
+.form-section {
+    margin: 0;
+    padding: var(--space-lg) var(--space-md);
+    background-color: var(--colour-surface);
+    border: 1px solid var(--colour-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.form-section > legend {
+    padding: 0 var(--space-sm);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--colour-primary);
+}
+
+/* === 12. Form: Fields === */
+.field {
+    margin-bottom: var(--space-lg);    
+}
+
+.field:last-child {
+    margin-bottom: 0;
+}
+
+label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-weight: 600;
+}
+
+/* Reference: MDN – "Attribute Selectors" */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select {
+    display: block;
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    font: inherit;
+    color: var(--colour-text);
+    background-color: var(--colour-surface);
+    border: 2px solid var(--colour-border);
+    border-radius: var(--radius);
+}
+
+input[type="number"] {
+    max-width: 8rem;
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="number"]:hover,
+select:hover {
+    border-color: var(--colour-accent);
+}
+
+.hint {
+    margin: var(--space-xs) 0 0;
+    font-size: 0.9rem;
+    color: var(--colour-text-muted)
+}
+
+/* Reference: MDN – "accent-color" property" */
+input[type="range"] {
+    width: 100%;
+    accent-color: var(--colour-accent);
+}
+
+output {
+    display: inline-block;
+    margin-top: var(--space-xs);
+    font-weight: 700;
+    color: var(--colour-primary);
+}
+
+/* === 13/ Form: Radio and Checkbox Questions === */
+.question {
+    margin:  0 0 var(--space-lg);
+    padding: 0;
+    border: none;
+}
+
+.question > legend {
+    margin-bottom: var(--space-sm);
+    font-weight: 600;
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.options-stacked {
+    flex-direction: column;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0 var(--space-sm) 0 0;
+    accent-color: var(--colour-accent);
+    cursor: pointer;
+}
+
+.options label {
+    display: inline;
+    margin: 0 var(--space-md);
+    font-weight: 400;
+    cursor: pointer;
+}
+
+/* Reference: MDN – "Adjacent Sibling Selector (+)" */
+input:checked + label {
+    font-weight: 700;
+    color: var(--colour-primary);
+}
+
+/* Consent checkbox sits beside label */
+.field-checkbox {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.field-checkbox input {
+    margin-top: 0.2rem;
+}
+
+.field-checkbox label {
+    flex: 1;
+    font-weight: 400;
+}
+
+
+/* === 14. Form: Errors & Status === */
+.error-message {
+    flex-basis: 100%;
+    margin: var(--space-xs) 0 0;
+    color: var(--colour-error);
+    font-weight: 600;
+}
+
+/* Reference: MDN – ":empty" pseudo-class" *//
+.error-message:empty {
+    display: none;
+}
+
+/* Reference: MDN – "Attribute selectors with ARIA attributes" */
+input[aria-invalid="true"],
+select[aria-invalid="true"] {
+    border-color: var(--colour-error);
+}
+
+.status {
+    margin-top: var(--space-md);
+    font-weight: 600;
+    color: var(--colour-primary);
+}
+
+.status:empty {
+    display: none;
+}
+
+.button-primary {
+    width: 100%;
+    font-size: 1.1rem;
+}
+
+
+/* === 15. Results: Summary and Advice === */
+.results-summary {
+    margin-bottom: var(--space-x1);
+    padding: var(--space-lg);
+    background-color: var(--colour-surface);
+    border-left: 6px solid var(--colour-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.results-meta {
+    margin-top: 0;
+    color: var(--colour-text-muted);
+}
+
+.score-value {
+    margin: var(--space-sm);
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.score-band {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-md);
+    color: #ffffff;
+    font-weight: 700;
+    border-radius: 999px;
+}
+
+/* Reference: MDN – "Attribute selectors" (styling via custom data attributes) */
+.results-summary[data-band="good"] { border-left-color: #1f6f43; }
+.results-summary[data-band="improve"] { border-left-color: #b54708; }
+.results-summary[data-band="risk"] { border-left-color: #b42318; }
+
+.results-summary[data-band="good"] .score-band { border-left-color: #1f6f43; }
+.results-summary[data-band="improve"] .score-band { border-left-color: #b54708; }
+.results-summary[data-band="risk"] .score-band { border-left-color: #b42318; }
+
+.advice-list {
+    margin: 0 0 var(--space-x1);
+    padding-left: var(--space-lg);
+}
+
+.advice-list li {
+    margin-bottom: var(--space-sm);
+}
+
+
+/* === 16. Results: Vulnerability Card === */
+.product-group {
+    margin-bottom: var(--space-x1);
+}
+
+.card-grid {
+    display: grid;
+    gap: var(--space-md)
+}
+
+.vuln-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    background-color: var(--colour-surface);
+    border-top: 5px solid var(--colour-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.vuln-card h4 {
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.vuln-meta {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--colour-text-muted);
+}
+
+/* Severity badge: colour and text */
+.severity-badge {
+    align-self: flex-start;
+    padding: 0.15rem 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: #ffffff;
+    background-color: #52606d;
+    border-radius: 999px;
+}
+
+/* Reference: MDN – "Attribute selectors" (custom data attributes for dynamic severity) */
+[data-severity="CRITICAL"] .severity-badge { background-color: #7a1212; }
+[data-severity="HIGH"] .severity-badge { background-color: #B42318; }
+[data-severity="MEDIUM"] .severity-badge { background-color: #B54708; }
+[data-severity="LOW"] .severity-badge { background-color: #1F6F43; }
+
+.vuln-card[data-severity="CRITICAL"] { border-top-color: #7a1212; }
+.vuln-card[data-severity="HIGH"] { border-top-color: #b42318; }
+.vuln-card[data-severity="MEDIUM"] { border-top-color: #b54708; }
+.vuln-card[data-severity="LOW"] { border-top-color: #1f6f43; }
+
+/* Reference: MDN – "<details> and <summary>" interactive disclosure element */
+.vuln-card summary {
+    font-weight: 600;
+    color: var(--colour-accent-dark);
+    cursor: pointer;
+}
+
+.vuln-card details p {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+/* Messages for loading, no results and errors */
+.notice {
+    padding: var(--space-md);
+    background-color: #e6f4f5;
+    border-left: 4px solid var(--colour-accent);
+    border-radius: var(--radius);
+}
+
+.notice-error {
+    background-color: #fdecea;
+    border-left-color: var(--colour-error) ;
+}
+
+.button-secondary {
+    background-color: transparent;
+    color: var(--colour-accent-dark);
+    border: 2px solid var(--colour-accent);
+}
+
+.button-secondary:hover {
+    background-color: var(--colour-accent);
+    color: #ffffff;
+}
+
+
+/* === 17. Tablet and Up (768px+) === */
+@media (min-width: 768px) {
+    h1 { font-size: 2.4rem; }
+    h2 { font-size: 1.75rem; }
+
+
+    /* Desktop navigation: hide menu button, show links in a row */
+    .menu-toggle {
+        display: none;
+    }
+
+    .site-nav {
+        flex-basis: auto;
+        max-height: none;
+        overflow: visible;
+        visibility: visible;
+    }
+
+    .site-nav ul {
+        display: flex;
+        gap: var(--space-lg);
+        margin: 0;
+    }
+
+    .site-nav a {
+        border-bottom: none;
+    }
+
+    /* 3 Step Card and 3 Resources Adjacent */
+    .steps,
+    .resource-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .form-section {
+        padding: var(--space-lg) var(--space-x1);
+    }
+
+    /* Reference: MDN – ":first-of-type" pseudo-class */
+    .check-form > fieldset:first-of-type {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: var(--space-lg);
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .button-primary {
+        width: auto;
+        justify-self: start;
+    }
+}
+
+
+/* === 18. Desktop (1024px+) === */
+@media (min-width: 1024px) {
+    h1 { font-size: 2.8rem; }
+
+    .intro {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* === 19. Reduced motion (accessibility) === */
+/* Reference: MDN – "prefers-reduced-motion" media query */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
+}

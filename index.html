@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content ="A cyber security health check for small businesses.">
+    <title>CyberCheck | Security health check for small businesses</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Header and Navigation -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href=index.html class="logo">CyberCheck</a>
+
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+                <span class="menu-icon" aria-hidden="true"></span>
+                <span class="menu-label">Menu</span>
+            </button>
+
+            <nav id="site-nav" class="site-nav" aria-label="Main">
+                <ul>
+                    <li><a href="#how-it-works">How it works</a></li>
+                    <li><a href="#check">Start your check</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- Introduction -->
+        <section class="intro" aria-labelledby="intro-heading">
+            <h1 id="intro-heading"> Is your business cyber secure?</h1>
+            <p>Answer a few questions to get a security score, practical advice, and the latest vulnerabilities in the software you use.</p>
+            <a href="#check" class="button">Start your check</a>
+        </section>
+
+        <!-- How it Works -->
+        <section id="how-it-works" class="how-it-works" aria-labelledby="how-heading">
+            <h2 id="how-heading">How it works</h2>
+            <ol class="steps">
+                <li>
+                    <h3>Answer the questions</h3>
+                    <p>Tell us about your business and security habits. This will take about two minutes. </p>
+                </li>
+                <li>
+                    <h3>Get your score</h3>
+                    <p>See how your habits compare with good practice, with clear advice for each gap. </p>
+                </li>
+                <li>
+                    <h3>Check your software</h3>
+                    <p>We search the US National Vulnerability Database for recent security flaws in the software you use.</p>
+                </li>
+            </ol>
+        </section>
+
+        <!-- The Check (HTML Form)-->
+        <section id="check" class="check" aria-labelledby="check-heading">
+            <h2 id="check-heading">Your security check</h2>
+
+            <form id="check-form" class="check-form" novalidate>
+                <p class="form-intro">All fields are required unless marked optional. It takes about two minutes.</p>
+
+            <!-- Fieldset 1: About your business -->
+            <fieldset class="form-section">
+                <legend>1. About your business</legend>
+
+                <div class="field">
+                    <label for="business-name">Business name</label>
+                    <input type="text" id="business-name" name="businessName" maxlength="60"
+                        autocomplete="organization" required aria-describedby="business-name-error">
+                    <p class="error-message" id="business-name-error"></p>
+                </div>
+
+                <div class="field">
+                    <label for="email">Email address</label>
+                    <input type="email" id="email" name="email" autocomplete="email" required
+                        aria-describedby="email-hint email-error">
+                    <p class="hint" id="email-hint">Shown on your report only. It is not stored or sent anywhere.</p>
+                    <p class="error-message" id="email-error"></p>
+                </div>
+
+                <div class="field">
+                    <label for="sector">Business sector</label>
+                    <select id="sector" name="sector" required aria-describedby="sector-error">
+                        <option value="">Please choose...</option>
+                        <option value="retail">Retail</option>
+                        <option value="hospitality">Hospitality</option>
+                        <option value="professional">Professional</option>
+                        <option value="health">Health</option>
+                        <option value="construction">Construction</option>
+                        <option value="charity">Charity</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <p class="error-message" id="sector-error"></p>
+                </div>
+
+                <div class="field">
+                    <label for="staff">Number of staff</label>
+                    <input type="range" id="staff" min="1" max="250" value="10"
+                        aria-describedby="staff-value">
+                    <output id="staff-value" for="staff">10 staff</output>
+                </div>
+            </fieldset>
+
+            <!-- Fieldset 2: Security Habits (Questions based on NCSC Small Business Guide)-->
+            <fieldset class="form-section">
+                <legend>2. Your security habits</legend>
+
+                <fieldset class="question" aria-describedby="mfa-error">
+                    <legend>Do you use 2-step verification on email and other key accounts?</legend>
+                    <div class="options">
+                        <input type="radio" id="mfa-yes" name="mfa" value="yes" required>
+                        <label for="mfa-yes">Yes</label>
+                        <input type="radio" id="mfa-no" name="mfa" value="no">
+                        <label for="mfa-no">No</label>
+                        <input type="radio" id="mfa-unsure" name="mfa" value="unsure">
+                        <label for="mfa-unsure">Not sure</label>
+                    </div>
+                    <p class="error-message" id="mfa-error"></p>
+                </fieldset>
+
+                <fieldset class="question" aria-describedby="backups-error">
+                    <legend>Do you back up important data to a separate loaction?</legend>
+                    <div class="options">
+                        <input type="radio" id="backups-yes" name="backups" value="yes" required>
+                        <label for="backups-yes">Yes</label>
+                        <input type="radio" id="backups-no" name="backups" value="no">
+                        <label for="backups-no">No</label>
+                        <input type="radio" id="backups-unsure" name="backups" value="unsure">
+                        <label for="backups-unsure">Not sure</label>
+                    </div>
+                    <p class="error-message" id="backups-error"></p>
+                </fieldset>
+
+                <fieldset class="question" aria-describedby="updates-error">
+                    <legend>Are your software and devices set to update automatically?</legend>
+                    <div class="options">
+                        <input type="radio" id="updates-yes" name="updates" value="yes" required>
+                        <label for="updates-yes">Yes</label>
+                        <input type="radio" id="updates-no" name="updates" value="no">
+                        <label for="updates-no">No</label>
+                        <input type="radio" id="updates-unsure" name="updates" value="unsure">
+                        <label for="updates-unsure">Not sure</label>
+                    </div>
+                    <p class="error-message" id="updates-error"></p>
+                </fieldset>
+
+                <fieldset class="question" aria-describedby="training-error">
+                    <legend>Have your staff had any security awareness training?</legend>
+                    <div class="options">
+                        <input type="radio" id="training-yes" name="training" value="yes" required>
+                        <label for="training-yes">Yes</label>
+                        <input type="radio" id="training-no" name="training" value="no">
+                        <label for="training-no">No</label>
+                        <input type="radio" id="training-unsure" name="training" value="unsure">
+                        <label for="training-unsure">Not sure</label>
+                    </div>
+                    <p class="error-message" id="training-error"></p>
+                </fieldset>
+
+                <fieldset class="question" aria-describedby="passwords-error">
+                    <legend>Does everyone use unique passwords or a password manager?</legend>
+                    <div class="options">
+                        <input type="radio" id="passwords-yes" name="passwords" value="yes" required>
+                        <label for="passwords-yes">Yes</label>
+                        <input type="radio" id="passwords-no" name="passwords" value="no">
+                        <label for="passwords-no">No</label>
+                        <input type="radio" id="passwords-unsure" name="passwords" value="unsure">
+                        <label for="passwords-unsure">Not sure</label>
+                    </div>
+                    <p class="error-message" id="passwords-error"></p>
+                </fieldset>
+            </fieldset>
+
+            <!-- Fieldset 3: Your software -->
+            <fieldset class="form-section">
+                <legend>3. Your software</legend>
+
+                <fieldset class="question" aria-describedby="software-hint software-error">
+                    <legend>Which of these does your business use?</legend>
+                    <p class="hint" id="software-hint">Choose up to 3. We will check each one for vulnerabilities.</p>
+                    <div class="options options-stacked">
+                        <div class="option">
+                            <input type="checkbox" id="sw-wordpress" name="software" value="WordPress">
+                            <label for="sw-wordpress">WordPress (website)</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="sw-outlook" name="software" value="Microsoft Outlook">
+                            <label for="sw-outlook">Microsoft Outlook (email)</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="sw-zoom" name="software" value="Zoom">
+                            <label for="sw-zoom">Zoom (video calls)</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="sw-teams" name="software" value="Microsoft Teams">
+                            <label for="sw-teams">Microsoft Teams (video calls)</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="sw-chrome" name="software" value="Google Chrome">
+                            <label for="sw-chrome">Google Chrome (web browser)</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="sw-adobe" name="software" value= "Acrobat Reader">
+                            <label for="sw-adobe">Adobe Acrobat Reader (PDF reader)</label>
+                        </div>
+                    </div>
+                    <p class="error-message" id="software-error"></p>
+                </fieldset>
+
+                <div class="field">
+                    <label for="severity">Show vulnerabilities rated</label>
+                    <select id="severity" name="severity">
+                        <option value="">All severities</option>
+                        <option value="CRITICAL">Critical only</option>
+                        <option value="HIGH">High only</option>
+                        <option value="MEDIUM">Medium only</option>
+                        <option value="LOW">Low only</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="results-count">Results per product</label>
+                    <input type="number" id="results-count" name="resultsCount" min="1" max="5" value="3"
+                        required aria-describedby="results-count-hint results-count-error">
+                    <p class="hint" id="results-count-hint">Between 1 and 5.</p>
+                    <p class="error-message" id="results-count-error"></p>
+                </div>
+            </fieldset>
+
+            <!-- Consent and Submit -->
+            <div class="field field-checkbox">
+                <input type="checkbox" id="consent" name="consent" required aria-describedby="consent-error">
+                <label for="consent">I understand this check gives general guidance and is not a full security audit.</label>
+                <p class="error-message" id="consent-error"></p>
+            </div>
+
+            <button type="submit" class="button button-primary">Run my check</button>
+            </form>
+ 
+            <!-- Status messages for screen readers -->
+            <div id="status" class="status" role="status"></div>
+        </section>
+
+        <!-- Results (Hidden until form submitted) -->
+        <section id="results" class="results" aria-labelledby="results-heading" hidden>
+            <h2 id="results-heading" tabindex="-1">Your results</h2>
+            <!-- Results added here by JavaScript -->
+        </section>
+
+        <!-- Resources -->
+        <section id="resources" class="resources" aria-labelledby="resources-heading">
+            <h2 id="resources-heading">Further help</h2>
+            <ul class="resource-list">
+                <li>
+                    <a href="https://www.ncsc.gov.uk/collection/small-business-guide" target="_blank" rel="noopener noreferrer">
+                        NCSC Small Business Guide<span class="visually-hidden"></span>
+                    </a>
+                    <p>Practical, low-cost steps from the UK's National Cyber Security Centre.</p>
+                </li>
+                <li>
+                    <a href="https://www.ncsc.gov.uk/cyberessentials/overview" target="_blank" rel="noopener noreferrer">
+                        Cyber Essentials<span class="visually-hidden"></span>
+                    </a>
+                    <p>The UK government-backed scheme to protect against cyber attacks.</p>
+                </li>
+                <li>
+                    <a href="https://nvd.nist.gov/" target="_blank" rel="noopener noreferrer">
+                        National Vulnerability Database<span class="visually-hidden"></span>
+                    </a>
+                    <p>The source of the vulnerability data used in this app.</p>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>This app uses data from the NVD API but is not endorsed or certified by the NVD.</p>
+        <p>CyberCheck gives general guidance and is not a full security audit.</p>
+        <p>&copy; 2026 Simon Hujwan</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
