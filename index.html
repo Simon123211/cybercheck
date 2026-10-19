@@ -15,7 +15,7 @@
     <!-- Header and Navigation -->
     <header class="site-header">
         <div class="header-inner">
-            <a href=index.html class="logo">CyberCheck</a>
+            <a href="index.html" class="logo">CyberCheck</a>
 
             <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
                 <span class="menu-icon" aria-hidden="true"></span>
@@ -103,7 +103,7 @@
 
                 <div class="field">
                     <label for="staff">Number of staff</label>
-                    <input type="range" id="staff" min="1" max="250" value="10"
+                    <input type="range" id="staff" name="staff" min="1" max="250" value="10"
                         aria-describedby="staff-value">
                     <output id="staff-value" for="staff">10 staff</output>
                 </div>
@@ -127,7 +127,7 @@
                 </fieldset>
 
                 <fieldset class="question" aria-describedby="backups-error">
-                    <legend>Do you back up important data to a separate loaction?</legend>
+                    <legend>Do you back up important data to a separate location?</legend>
                     <div class="options">
                         <input type="radio" id="backups-yes" name="backups" value="yes" required>
                         <label for="backups-yes">Yes</label>
@@ -252,7 +252,6 @@
         <!-- Results (Hidden until form submitted) -->
         <section id="results" class="results" aria-labelledby="results-heading" hidden>
             <h2 id="results-heading" tabindex="-1">Your results</h2>
-            <!-- Results added here by JavaScript -->
         </section>
 
         <!-- Resources -->
@@ -261,19 +260,19 @@
             <ul class="resource-list">
                 <li>
                     <a href="https://www.ncsc.gov.uk/collection/small-business-guide" target="_blank" rel="noopener noreferrer">
-                        NCSC Small Business Guide<span class="visually-hidden"></span>
+                        NCSC Small Business Guide<span class="visually-hidden">(opens in new tab)</span>
                     </a>
                     <p>Practical, low-cost steps from the UK's National Cyber Security Centre.</p>
                 </li>
                 <li>
                     <a href="https://www.ncsc.gov.uk/cyberessentials/overview" target="_blank" rel="noopener noreferrer">
-                        Cyber Essentials<span class="visually-hidden"></span>
+                        Cyber Essentials<span class="visually-hidden">(opens in new tab)</span>
                     </a>
                     <p>The UK government-backed scheme to protect against cyber attacks.</p>
                 </li>
                 <li>
                     <a href="https://nvd.nist.gov/" target="_blank" rel="noopener noreferrer">
-                        National Vulnerability Database<span class="visually-hidden"></span>
+                        National Vulnerability Database<span class="visually-hidden">(opens in new tab)</span>
                     </a>
                     <p>The source of the vulnerability data used in this app.</p>
                 </li>
@@ -283,7 +282,7 @@
 
     <!-- Footer -->
     <footer class="site-footer">
-        <p>This app uses data from the NVD API but is not endorsed or certified by the NVD.</p>
+        <p>This product uses data from the NVD API but is not endorsed or certified by the NVD.</p>
         <p>CyberCheck gives general guidance and is not a full security audit.</p>
         <p>&copy; 2026 Simon Hujwan</p>
     </footer>

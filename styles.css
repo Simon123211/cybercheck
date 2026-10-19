@@ -271,7 +271,7 @@ main > section {
     box-shadow: var(--shadow);
 }
 
-/* Customs step numbers using CSS counter and ::before */
+/* Custom step numbers using CSS counter and ::before */
 /* Reference: MDN – "Generated Content ::before and ::after" */
 .steps li::before {
     content: counter(step);
@@ -421,7 +421,7 @@ output {
     color: var(--colour-primary);
 }
 
-/* === 13/ Form: Radio and Checkbox Questions === */
+/* === 13. Form: Radio and Checkbox Questions === */
 .question {
     margin:  0 0 var(--space-lg);
     padding: 0;
@@ -495,7 +495,7 @@ input:checked + label {
     font-weight: 600;
 }
 
-/* Reference: MDN – ":empty" pseudo-class" *//
+/* Reference: MDN – ":empty" pseudo-class" */
 .error-message:empty {
     display: none;
 }
@@ -557,9 +557,9 @@ select[aria-invalid="true"] {
 .results-summary[data-band="improve"] { border-left-color: #b54708; }
 .results-summary[data-band="risk"] { border-left-color: #b42318; }
 
-.results-summary[data-band="good"] .score-band { border-left-color: #1f6f43; }
-.results-summary[data-band="improve"] .score-band { border-left-color: #b54708; }
-.results-summary[data-band="risk"] .score-band { border-left-color: #b42318; }
+.results-summary[data-band="good"] .score-band { background-color: #1f6f43; }
+.results-summary[data-band="improve"] .score-band { background-color: #b54708; }
+.results-summary[data-band="risk"] .score-band { background-color: #b42318; }
 
 .advice-list {
     margin: 0 0 var(--space-x1);
